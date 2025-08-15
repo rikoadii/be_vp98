@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\TeamController;
+use App\Http\Controllers\Api\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Project Routes
-Route::prefix('projects')->group(function () {
-    Route::get('/', [ProjectController::class, 'index']);
-    Route::post('/', [ProjectController::class, 'store']);
-    Route::get('/{id}', [ProjectController::class, 'show']);
-    Route::put('/{id}', [ProjectController::class, 'update']);
-    Route::delete('/{id}', [ProjectController::class, 'destroy']);
-});
+// Team API Routes
+Route::apiResource('teams', TeamController::class)->only(['index', 'show']);
+
+// Category API Routes
+Route::apiResource('categories', CategoryController::class)->only(['index', 'show']);
+
+// Project API Routes
+Route::apiResource('projects', ProjectController::class)->only(['index', 'show']);
+

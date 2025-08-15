@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Project;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,17 +14,17 @@ class ProjectController extends Controller
     public function index()
     {
         try {
-            $projects = Project::with('category')->get();
+            $categories = Category::with('projects')->get();
             
             return response()->json([
                 'success' => true,
-                'message' => 'Projects retrieved successfully',
-                'data' => $projects
+                'message' => 'Categories retrieved successfully',
+                'data' => $categories
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to retrieve projects',
+                'message' => 'Failed to retrieve categories',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -36,26 +36,19 @@ class ProjectController extends Controller
     public function show(string $id)
     {
         try {
-            $project = Project::with('category')->find($id);
-            
-            if (!$project) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Project not found'
-                ], 404);
-            }
+            $category = Category::with('projects')->findOrFail($id);
             
             return response()->json([
                 'success' => true,
-                'message' => 'Project retrieved successfully',
-                'data' => $project
+                'message' => 'Category retrieved successfully',
+                'data' => $category
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to retrieve project',
+                'message' => 'Category not found',
                 'error' => $e->getMessage()
-            ], 500);
+            ], 404);
         }
     }
 }
