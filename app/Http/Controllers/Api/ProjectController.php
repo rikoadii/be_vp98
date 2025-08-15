@@ -35,27 +35,6 @@ class ProjectController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $project = Project::with('category')->find($id);
-            
-            if (!$project) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Project not found'
-                ], 404);
-            }
-            
-            return response()->json([
-                'success' => true,
-                'message' => 'Project retrieved successfully',
-                'data' => $project
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to retrieve project',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+        //
     }
 }
