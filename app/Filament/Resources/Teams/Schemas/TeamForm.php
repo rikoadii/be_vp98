@@ -18,7 +18,7 @@ class TeamForm
                     ->required()
                     ->label('Profile Picture')
                     ->disk('public')
-                    ->directory('team_profiles')
+                    ->directory('teams')
                     ->visibility('public')
                     ->maxSize(102400)
                     ->image(),

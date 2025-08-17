@@ -20,8 +20,13 @@ class ProjectsTable
                     ->searchable(),
                 TextColumn::make('location_projects')
                     ->searchable(),
-                ImageColumn::make('image'),
+                ImageColumn::make('image')
+                    ->disk('public')
+                    ->imageSize(100)
+                    ->label('Project Image')
+                    ->visibility('public'),
                 IconColumn::make('isMain')
+                    ->label('Is Main Image')
                     ->boolean(),
                 TextColumn::make('category_projects')
                     ->numeric()

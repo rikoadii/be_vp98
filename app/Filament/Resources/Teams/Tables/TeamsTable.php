@@ -24,7 +24,7 @@ class TeamsTable
                     ->visibility('public')
                     ->label('Profile Picture')
                     ->square()
-                    ->imageSize(50),
+                    ->imageSize(100),
                 TextColumn::make('role')
                     ->searchable(),
                 TextColumn::make('created_at')

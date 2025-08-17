@@ -24,6 +24,12 @@ class ProjectForm
                     ->required()
                     ->columnSpanFull(),
                 FileUpload::make('image')
+                    ->required()
+                    ->label('Project Image')
+                    ->disk('public')
+                    ->directory('projects')
+                    ->visibility('public')
+                    ->maxSize(102400)
                     ->image(),
                 // Toggle::make('isMain')
                 //     ->required(),
